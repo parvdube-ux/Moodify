@@ -1,26 +1,33 @@
-const express = require('express')
-const app = express()
-const cookieParser = require('cookie-parser')
-const authRoutes = require("./routes/auth.routes")
-const moodRoutes = require("./routes/mood.routes")
-const cors = require('cors')
-const playlistRoutes = require('./routes/playlist.routes')
+const express = require("express");
+const app = express();
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
+const authRoutes = require("./routes/auth.routes");
+const moodRoutes = require("./routes/mood.routes");
+const playlistRoutes = require("./routes/playlist.routes");
 
-
-app.use(express.json())
-app.use(cookieParser())
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-}))
-
-app.use('/api/auth',authRoutes)
-app.use('/api/moods',moodRoutes)
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(
-  "/api/playlists",
-  playlistRoutes
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://YOUR-VERCEL-APP.vercel.app",
+    ],
+    credentials: true,
+  })
 );
 
-module.exports = app
+app.get("/", (req, res) => {
+  res.json({
+    message: "Moodify Backend is Running 🚀",
+  });
+});
+
+app.use("/api/auth", authRoutes);
+app.use("/api/moods", moodRoutes);
+app.use("/api/playlists", playlistRoutes);
+
+module.exports = app;
