@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = async () => {
     try {
       const res = await axios.get(
-        "https://moodify-3d5t.onrender.com/api/auth/me",
+        "https://moodify-3d5t.onrender.com/api/auth/getme",
         {
           withCredentials: true,
         }
