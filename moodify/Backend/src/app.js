@@ -10,7 +10,7 @@ const app = express();
 
 // ✅ MUST BE FIRST MIDDLEWARE
 app.use(cors({
-  origin: "https://moodify-boyd32vqq-parv7.vercel.app",
+  origin: "https://moodify-parv7.vercel.app/",
   credentials: true
 }));
 
