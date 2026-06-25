@@ -8,14 +8,8 @@ const playlistRoutes = require("./routes/playlist.routes");
 
 const app = express();
 
-// MUST BE FIRST
+// ✅ MUST BE FIRST MIDDLEWARE
 app.use(cors({
-  origin: "https://moodify-boyd32vqq-parv7.vercel.app",
-  credentials: true
-}));
-
-// MUST handle preflight
-app.options("*", cors({
   origin: "https://moodify-boyd32vqq-parv7.vercel.app",
   credentials: true
 }));
@@ -23,7 +17,10 @@ app.options("*", cors({
 app.use(express.json());
 app.use(cookieParser());
 
-// routes
+app.get("/", (req, res) => {
+  res.json({ message: "Moodify Backend Running 🚀" });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/moods", moodRoutes);
 app.use("/api/playlists", playlistRoutes);
