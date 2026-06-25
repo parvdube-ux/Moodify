@@ -8,9 +8,25 @@ const playlistRoutes = require("./routes/playlist.routes");
 
 const app = express();
 
-// ✅ MUST BE FIRST MIDDLEWARE
+const allowedOrigins = [
+  "https://moodify-parv7.vercel.app",
+  "http://localhost:3000"
+];
+
 app.use(cors({
-  origin: "https://moodify-parv7.vercel.app/",
+  origin: function (origin, callback) {
+    // allow server-to-server or mobile apps (no origin)
+    if (!origin) return callback(null, true);
+
+    // normalize trailing slash just in case
+    const normalizedOrigin = origin.replace(/\/$/, "");
+
+    if (allowedOrigins.includes(normalizedOrigin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("CORS blocked: " + origin));
+  },
   credentials: true
 }));
 
