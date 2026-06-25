@@ -1,7 +1,7 @@
 import React from "react";
 import newlogo from "../../assets/newlogo.png";
 import useLogout from "../../features/Auth/hooks/useLogout";
-import "./Navbar.scss";
+import "./navbar.scss";
 
 const Navbar = () => {
   const logoutHandler = useLogout(); 
